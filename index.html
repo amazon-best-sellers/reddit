@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting...</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background: #f9fafb;
+      color: #111827;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+    .card {
+      background: white;
+      padding: 2rem 3rem;
+      border-radius: 1rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Redirecting...</h1>
+    <p id="status">Please wait a moment.</p>
+  </div>
+
+  <script>
+    const redirects = {
+      "waterdrop_g3": "https://lvnta.com/lv_PORBK2Ent5Ye2X4Ha9",
+      "puroair_air_purifier": "https://lvnta.com/lv_ZZuCywNwvXJ6QYS4kp"
+    };
+
+    function getParam(name) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(name);
+    }
+
+    const key = (getParam("to") || "").toLowerCase().trim();
+    const url = redirects[key];
+    const status = document.getElementById("status");
+
+    if (url) {
+      status.innerHTML = `Found <b>${key}</b> — redirecting now...`;
+      setTimeout(() => window.location.replace(url), 100);
+    } else {
+      status.innerHTML = `No redirect found for <b>${key || "unknown"}</b>.<br>Try using ?to=waterdrop_g3 or ?to=puroair_air_purifier`;
+    }
+  </script>
+</body>
+</html>
